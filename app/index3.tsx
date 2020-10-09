@@ -1,5 +1,5 @@
-function app(text:number){
-return text
+function app(){
+console.log('The tsx file is empty')
 }
 
 
