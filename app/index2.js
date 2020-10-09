@@ -1,6 +1,11 @@
 import React from "react";
 import { useReducer } from "react";
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import app from './index3.tsx';
+
+app('jopa');
+app(1);
+
 
 function reducer(state, action) {
   switch (action.type) {
