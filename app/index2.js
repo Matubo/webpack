@@ -1,12 +1,10 @@
 import React from "react";
-import { useReducer } from "react";
+import { useReducer,useState} from "react";
 import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import store from './store.js';
 import app from './index3.tsx';
 
-app('jopa');
-app(1);
-
-
+ 
 function reducer(state, action) {
   switch (action.type) {
     case "increment":
@@ -18,15 +16,11 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, 0);
+  const [state2,setState2]=useState(0);
+  store.subscribe(()=>{setState2(store.getState())})
   return (
     <div className="test">
-      <div>test sum={state}</div>
-      <Router prop={dispatch}>
-        <Link to="/">*</Link>
-        <Link to="/decrement">#</Link>
-        <Route exact path="/" component={Increment} prop={1}></Route>
-        <Route exact path="/decrement" component={Decrement} prop={2}></Route>
-      </Router>
+      <div>test useReducer sum={state}</div>
       <button
         onClick={() => {
           dispatch({ type: "decrement" });
@@ -41,16 +35,32 @@ function App() {
       >
         +
       </button>
+      <div>test redux sum2={state2}</div>
+      <button
+        onClick={() => {
+          store.dispatch({ type: "del" });
+        }}
+      >
+        --
+      </button>
+      <button
+        onClick={() => {
+          store.dispatch({ type: "add" });
+        }}
+      >
+        ++
+      </button>
+       <Router>
+        <Link to="/">*</Link>
+        <Link to="/decrement">#</Link>
+        <Route exact path="/"></Route>
+        <Route exact path="/decrement"></Route>
+      </Router> 
     </div>
+    
   );
 }
 
-function Increment(a) {
-  return <button onClick={() => {}}>*</button>;
-}
 
-function Decrement(a) {
-  return <button onClick={() => {}}>#</button>;
-}
 
 export default App;
